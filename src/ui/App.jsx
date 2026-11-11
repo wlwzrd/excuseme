@@ -12,9 +12,14 @@ export default function App({ service }) {
 
   return (
     <div className="flex flex-col h-screen max-w-md mx-auto bg-slate-950 font-sans shadow-2xl relative border-x border-slate-800">
-      <Header />
+      <Header onShare={service.share} />
       <DelaySelector delay={delay} onChange={service.setDelay} />
-      <MessageList messages={messages} call={call} onSelectScenario={service.selectScenario} />
+      <MessageList
+        messages={messages}
+        call={call}
+        onSelectScenario={service.selectScenario}
+        onRate={service.rate}
+      />
       <InputBar />
       {isActive(call) && (
         <CallScreen

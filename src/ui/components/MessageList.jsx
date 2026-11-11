@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { AlertTriangle, CheckCheck } from 'lucide-react';
 import { CallStatus } from '../../domain/call.js';
+import RatingCard from './RatingCard.jsx';
 import ScenarioMenu from './ScenarioMenu.jsx';
 
 const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-export default function MessageList({ messages, call, onSelectScenario }) {
+export default function MessageList({ messages, call, onSelectScenario, onRate }) {
   const endRef = useRef(null);
   const countdown = call.status === CallStatus.COUNTDOWN ? call.secondsLeft : null;
 
@@ -30,6 +31,7 @@ export default function MessageList({ messages, call, onSelectScenario }) {
               {msg.sender === 'user' && <CheckCheck className="w-3 h-3 text-emerald-300" />}
             </div>
           </div>
+          {msg.rating && <RatingCard rating={msg.rating} onRate={(value) => onRate(msg.id, value)} />}
           {msg.showOptions && <ScenarioMenu onSelect={onSelectScenario} />}
         </div>
       ))}

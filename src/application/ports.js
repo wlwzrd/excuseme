@@ -32,4 +32,23 @@
  * @property {(ms: number, fn: () => void) => (() => void)} every  Devuelve la función para cancelarlo.
  */
 
+/**
+ * Analítica de uso. Nunca debe lanzar errores ni bloquear la app (RNF-14).
+ * @typedef {Object} Analytics
+ * @property {(event: string, params?: Record<string, string | number | boolean>) => void} track
+ */
+
+/**
+ * Memoria local y anónima del visitante (RF-18). No sale del navegador.
+ * @typedef {Object} VisitorStore
+ * @property {() => { isFirstVisit: boolean }} registerVisit
+ * @property {(date: Date) => number} registerAnsweredCall  Devuelve en cuántos días distintos ha contestado llamadas.
+ */
+
+/**
+ * Compartir el enlace de la app (RF-20).
+ * @typedef {Object} Sharer
+ * @property {() => Promise<'shared' | 'copied' | 'cancelled' | 'unavailable'>} share
+ */
+
 export {};

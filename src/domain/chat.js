@@ -23,12 +23,29 @@ export function selection(scenario) {
   ];
 }
 
-export function callLog(reason, durationSeconds) {
-  return {
+// ratingFor: id del escenario cuando el mensaje debe pedir la calificación "¿Te funcionó?".
+export function callLog(reason, durationSeconds, { ratingFor = null } = {}) {
+  const message = {
     sender: 'bot',
     text: `📞 ${reason}. Duración: ${formatDuration(durationSeconds)}.\n\n¿Quieres programar otra excusa?`,
     showOptions: true,
   };
+  return ratingFor ? { ...message, rating: { scenarioId: ratingFor, value: null } } : message;
+}
+
+export const RATING_VALUES = Object.freeze([1, 2, 3, 4, 5]);
+
+export function rate(messages, messageId, value) {
+  if (!RATING_VALUES.includes(value)) throw new Error(`Calificación inválida: ${value}`);
+  return messages.map((m) =>
+    m.id === messageId && m.rating && m.rating.value === null
+      ? { ...m, rating: { ...m.rating, value } }
+      : m,
+  );
+}
+
+export function linkCopied() {
+  return { sender: 'bot', text: '🔗 Enlace copiado. ¡Compártelo con quien lo necesite!', showOptions: false };
 }
 
 export function hideOptions(messages) {

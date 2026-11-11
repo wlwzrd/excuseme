@@ -1,7 +1,7 @@
 import React from 'react';
-import { MoreVertical, ShieldCheck } from 'lucide-react';
+import { Share2, ShieldCheck } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ onShare }) {
   return (
     <header className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between z-10">
       <div className="flex items-center space-x-3">
@@ -20,7 +20,9 @@ export default function Header() {
         </div>
       </div>
       <div className="flex items-center space-x-2 text-slate-400">
-        <MoreVertical className="w-5 h-5 cursor-pointer hover:text-white transition" />
+        <button onClick={onShare} aria-label="Compartir ExcuseMe" className="p-1.5 rounded-full hover:text-white hover:bg-slate-800 transition">
+          <Share2 className="w-5 h-5" />
+        </button>
       </div>
     </header>
   );

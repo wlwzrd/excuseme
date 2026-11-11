@@ -56,6 +56,13 @@ export function toggleMute(call) {
   return { ...call, muted: !call.muted };
 }
 
+// Una llamada cuenta para considerar a alguien "usuario" si fue contestada y duró al menos esto.
+export const MIN_USER_CALL_SECONDS = 10;
+
+export function countsAsUser(durationSeconds) {
+  return durationSeconds >= MIN_USER_CALL_SECONDS;
+}
+
 export function isActive(call) {
   return call.status === CallStatus.RINGING || call.status === CallStatus.CONNECTED;
 }

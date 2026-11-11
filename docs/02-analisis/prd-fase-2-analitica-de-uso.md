@@ -1,6 +1,6 @@
 # PRD — ExcuseMe Fase 2: Analítica de uso
 
-10 de noviembre de 2026 · Mario · Estado: aprobado, por construir
+10 de noviembre de 2026 · Mario · Estado: entrega 1 construida; entrega 2 por construir
 
 La fase 2 agrega medición a la web para decidir con datos si vale la pena invertir en la fase 3 (WhatsApp y llamada real con Twilio).
 

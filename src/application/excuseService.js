@@ -3,6 +3,11 @@
 import * as Call from '../domain/call.js';
 import * as Chat from '../domain/chat.js';
 import { findScenario } from '../domain/scenarios.js';
+import { Events } from './events.js';
+
+const noAnalytics = { track() {} };
+const noVisitor = { registerVisit: () => ({ isFirstVisit: false }), registerAnsweredCall: () => 1 };
+const noSharer = { share: async () => 'unavailable' };
 
 /**
  * @param {{
@@ -10,9 +15,22 @@ import { findScenario } from '../domain/scenarios.js';
  *   voice: import('./ports.js').VoiceSpeaker,
  *   vibrator: import('./ports.js').Vibrator,
  *   clock: import('./ports.js').Clock,
+ *   analytics?: import('./ports.js').Analytics,
+ *   visitor?: import('./ports.js').VisitorStore,
+ *   sharer?: import('./ports.js').Sharer,
+ *   channel?: string,
  * }} ports
  */
-export function createExcuseService({ ringtone, voice, vibrator, clock }) {
+export function createExcuseService({
+  ringtone,
+  voice,
+  vibrator,
+  clock,
+  analytics = noAnalytics,
+  visitor = noVisitor,
+  sharer = noSharer,
+  channel = 'sin_etiqueta',
+}) {
   let nextId = 1;
   const stamp = (message) => ({ ...message, id: nextId++, at: clock.now() });
 
@@ -29,6 +47,16 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
     listeners.forEach((listener) => listener());
   };
 
+  // La analítica nunca debe romper un caso de uso (RNF-14).
+  const track = (event, params) => {
+    try {
+      analytics.track(event, params);
+    } catch {
+      /* se ignora */
+    }
+  };
+
+  let scriptFinished = false;
   let cancelTicker = null;
   const stopTicker = () => {
     if (cancelTicker) cancelTicker();
@@ -58,14 +86,31 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
   }
 
   function endCall(reason) {
-    const { duration } = state.call;
+    const { duration, scenario, status } = state.call;
+    const wasConnected = status === Call.CallStatus.CONNECTED;
+
+    if (wasConnected) {
+      track(Events.CALL_HUNG_UP, {
+        tipo: scenario.id,
+        duracion: duration,
+        longitud_guion: scenario.script.length,
+        guion_completo: scriptFinished,
+        valida: Call.countsAsUser(duration),
+      });
+    } else {
+      track(Events.CALL_REJECTED, { tipo: scenario.id });
+    }
+
     stopTicker();
     stopRinging();
     voice.cancel();
     update({
       call: Call.idle(),
       isSpeaking: false,
-      messages: [...state.messages, stamp(Chat.callLog(reason, duration))],
+      messages: [
+        ...state.messages,
+        stamp(Chat.callLog(reason, duration, { ratingFor: wasConnected ? scenario.id : null })),
+      ],
     });
   }
 
@@ -75,6 +120,12 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
     subscribe(listener) {
       listeners.add(listener);
       return () => listeners.delete(listener);
+    },
+
+    // Se llama una vez al abrir la app.
+    start() {
+      const { isFirstVisit } = visitor.registerVisit();
+      track(Events.VISIT, { primera_visita: isFirstVisit, canal: channel });
     },
 
     setDelay(seconds) {
@@ -87,6 +138,7 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
       if (state.call.status !== Call.CallStatus.IDLE) return;
       const scenario = findScenario(scenarioId);
       const call = Call.schedule(scenario, state.delay);
+      track(Events.EXCUSE_SELECTED, { tipo: scenario.id, retardo: state.delay });
       update({
         call,
         messages: [...Chat.hideOptions(state.messages), ...Chat.selection(scenario).map(stamp)],
@@ -99,11 +151,19 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
       if (state.call.status !== Call.CallStatus.RINGING) return;
       stopRinging();
       const call = Call.answer(state.call);
+      scriptFinished = false;
       update({ call });
+      track(Events.CALL_ANSWERED, {
+        tipo: call.scenario.id,
+        dia_de_uso: visitor.registerAnsweredCall(clock.now()),
+      });
       startTicker();
       voice.speak(call.scenario.script, {
         onStart: () => update({ isSpeaking: true }),
-        onEnd: () => update({ isSpeaking: false }),
+        onEnd: ({ completed = false } = {}) => {
+          if (completed && state.call.status === Call.CallStatus.CONNECTED) scriptFinished = true;
+          update({ isSpeaking: false });
+        },
       });
     },
 
@@ -121,6 +181,21 @@ export function createExcuseService({ ringtone, voice, vibrator, clock }) {
       update({ call });
       if (call.muted) voice.pause();
       else voice.resume();
+    },
+
+    // Calificación "¿Te funcionó?" de 1 a 5 (RF-16). Solo se acepta una vez por llamada.
+    rate(messageId, value) {
+      const target = state.messages.find((m) => m.id === messageId);
+      if (!target?.rating || target.rating.value !== null) return;
+      update({ messages: Chat.rate(state.messages, messageId, value) });
+      track(Events.RATING, { valor: value, tipo: target.rating.scenarioId });
+    },
+
+    async share() {
+      track(Events.SHARE);
+      const result = await sharer.share();
+      if (result === 'copied') update({ messages: [...state.messages, stamp(Chat.linkCopied())] });
+      return result;
     },
 
     dispose() {

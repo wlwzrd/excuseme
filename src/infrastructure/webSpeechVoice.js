@@ -19,8 +19,8 @@ export function createWebSpeechVoice() {
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
       utterance.onstart = onStart;
-      utterance.onend = onEnd;
-      utterance.onerror = onEnd;
+      utterance.onend = () => onEnd({ completed: true });
+      utterance.onerror = () => onEnd({ completed: false });
       const voice = pickSpanishVoice(synth.getVoices());
       if (voice) utterance.voice = voice;
       synth.speak(utterance);
