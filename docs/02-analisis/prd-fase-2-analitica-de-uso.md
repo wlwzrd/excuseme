@@ -45,6 +45,17 @@ El reingreso mide H4, no H1: alguien puede volver por curiosidad aunque la llama
 - Guardar o enviar el texto de las excusas personalizadas.
 - Publicidad o campañas pagadas.
 
+## Entregas
+
+La fase se construye en dos entregas: primero la analítica, para llegar antes a los datos, y después las mejoras.
+
+| Entrega | Requisitos | Qué permite |
+| --- | --- | --- |
+| 1. Analítica | RF-13 a RF-16 y RF-18 a RF-21 | Medir H1, H3, H4 y el criterio de decisión. Con ella arrancan el lanzamiento y el conteo de 30 días |
+| 2. Mejoras | RF-17, RF-22 y RF-23 | Excusa Custom por chat, barra de escritura funcional y recordar la última excusa. Permite medir H2 |
+
+H2 queda sin medir hasta la entrega 2, porque depende de que exista la opción Custom.
+
 ## Requisitos funcionales
 
 | ID | Requisito | Criterio de aceptación | Origen |

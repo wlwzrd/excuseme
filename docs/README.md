@@ -15,7 +15,7 @@ ExcuseMe se construye simulando el ciclo completo de un producto. Cada carpeta c
 | Fase | PRD | Estado |
 | --- | --- | --- |
 | 1. MVP web | [prd-fase-1-mvp-web.md](02-analisis/prd-fase-1-mvp-web.md) | Publicada |
-| 2. Analítica de uso | [prd-fase-2-analitica-de-uso.md](02-analisis/prd-fase-2-analitica-de-uso.md) | PRD aprobado, por construir |
+| 2. Analítica de uso | [prd-fase-2-analitica-de-uso.md](02-analisis/prd-fase-2-analitica-de-uso.md) | PRD aprobado; entrega 1 (analítica) por construir |
 | 3. WhatsApp y llamada real con Twilio | [prd-fase-3-whatsapp-twilio.md](02-analisis/prd-fase-3-whatsapp-twilio.md) | En espera de los resultados de la fase 2 |
 
 ## Cómo se mantienen estos documentos
