@@ -1,4 +1,4 @@
-# PRD — ExcuseMe Fase 3: WhatsApp y llamada real con Twilio
+# PRD — ExcuseMe Fase 4: WhatsApp y llamada real con Twilio
 
 10 de noviembre de 2026 · Mario · Estado: en espera; depende de los resultados de la fase 2 (analítica de uso)
 
@@ -17,7 +17,7 @@ ExcuseMe hoy simula una llamada dentro del navegador: el usuario abre la web, el
 | Backend | Ninguno |
 | Código | [github.com/wlwzrd/excuseme](https://github.com/wlwzrd/excuseme), arquitectura hexagonal con 21 pruebas |
 
-La fase 3 propone que la excusa llegue por canales reales: un bot de WhatsApp para pedirla y una llamada verdadera al celular, ambos con Twilio.
+La fase 4 propone que la excusa llegue por canales reales: un bot de WhatsApp para pedirla y una llamada verdadera al celular, ambos con Twilio.
 
 ## Dependencias y restricciones de Twilio y Meta
 
@@ -29,7 +29,7 @@ La ruta más simple es WhatsApp para el chat y una llamada telefónica normal; l
 | Programmable Voice | Llamada real al celular con voz que lee el guion | Cobro por minuto; hace falta un número de origen |
 | [WhatsApp Business Calling](https://www.twilio.com/docs/voice/whatsapp-business-calling) | Llamada que entra por WhatsApp | Permiso explícito del usuario antes de llamar; límite mínimo de 2.000 conversaciones iniciadas por la empresa cada 24 h; la llamada aparece a nombre de la empresa |
 
-- Las credenciales de Twilio no pueden estar en el navegador: la fase 3 necesita un backend, y GitHub Pages solo sirve archivos estáticos.
+- Las credenciales de Twilio no pueden estar en el navegador: la fase 4 necesita un backend, y GitHub Pages solo sirve archivos estáticos.
 - Las llamadas salientes por WhatsApp no están disponibles para remitentes de EE. UU., Canadá, Egipto, Nigeria y Turquía; Colombia no está excluida.
 - Las tarifas de Meta cambian cada trimestre; hay que confirmarlas en la página de precios de Twilio antes de estimar costos.
 - Por confirmar: si el Sandbox de WhatsApp de Twilio alcanza para el prototipo sin registrar una empresa en Meta.

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Share2, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
+import AppMenu from './AppMenu.jsx';
 
-export default function Header({ onShare }) {
+export default function Header({ onShare, onOpenPage }) {
   return (
-    <header className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between z-10">
+    <header className="relative z-20 bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
       <div className="flex items-center space-x-3">
         <div className="relative">
           <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-lg shadow-md">
@@ -19,11 +20,7 @@ export default function Header({ onShare }) {
           <p className="text-xs text-emerald-400 font-medium">en línea (Servicio de Excusas)</p>
         </div>
       </div>
-      <div className="flex items-center space-x-2 text-slate-400">
-        <button onClick={onShare} aria-label="Compartir ExcuseMe" className="p-1.5 rounded-full hover:text-white hover:bg-slate-800 transition">
-          <Share2 className="w-5 h-5" />
-        </button>
-      </div>
+      <AppMenu onShare={onShare} onOpenPage={onOpenPage} />
     </header>
   );
 }

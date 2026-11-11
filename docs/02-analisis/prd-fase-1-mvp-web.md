@@ -34,7 +34,7 @@ La web permite probar la idea en horas y sin costo recurrente; las otras dos rut
 | Backend | No requiere | Opcional | Obligatorio, por las credenciales |
 | Realismo de la llamada | Bajo: la pantalla debe estar abierta | Medio | Alto: el teléfono suena de verdad |
 
-La web sacrifica realismo a cambio de velocidad de aprendizaje. La fase 2 mide las hipótesis; si se confirman, el realismo se compra en la fase 3.
+La web sacrifica realismo a cambio de velocidad de aprendizaje. La fase 2 mide las hipótesis; si se confirman, el realismo se compra en la fase 4.
 
 ## Usuario objetivo y casos de uso
 
@@ -120,17 +120,18 @@ Hoy no se puede medir nada: la web no tiene analítica, por diseño (RNF-02). Va
 
 | Limitación o riesgo | Efecto | Qué hacer |
 | --- | --- | --- |
-| El teléfono no suena de verdad: la web debe estar abierta y la pantalla encendida | Es la mayor amenaza para H1 | Motivo principal de la fase 3 |
-| Los navegadores bloquean el audio hasta que el usuario toca la página | Con retardo funciona, porque el toque ya ocurrió; conviene confirmarlo en iPhone | Probar en dispositivos reales |
-| La voz depende de las voces instaladas en cada dispositivo | Puede sonar robótica o con acento de España | Fase 3: voz generada en servidor |
-| Guiones fijos y nombres genéricos ("Mamá (Urgente)") | Menos creíble para quien conoce al usuario | Fase 2: opción Custom |
-| La barra para escribir es decorativa | Puede confundir: parece un chat, pero no acepta texto | Fase 2: se activa (RF-22) |
+| El teléfono no suena de verdad: la web debe estar abierta y la pantalla encendida | Es la mayor amenaza para H1 | Motivo principal de la fase 4 |
+| iOS solo permite iniciar audio dentro de un toque del usuario | En iPhone el tono no sonaba cuando la llamada tenía retardo | Corregido el 11 de noviembre de 2026: el audio se desbloquea en el toque que elige la excusa. Falta confirmarlo en un iPhone |
+| iOS no ofrece vibración a las páginas web y puede silenciar el audio con el interruptor de silencio | En iPhone la llamada no vibra, y en modo silencio puede no sonar | Sin solución para la vibración; para el silencio se pide a Safari tratar el sonido como reproducción, sin confirmar |
+| La voz depende de las voces instaladas en cada dispositivo | Puede sonar robótica o con acento de España | Fase 4: voz generada en servidor |
+| Guiones fijos y nombres genéricos ("Mamá (Urgente)") | Menos creíble para quien conoce al usuario | Fase 3: opción Custom |
+| La barra para escribir es decorativa | Puede confundir: parece un chat, pero no acepta texto | Fase 3: se activa (RF-22) |
 | Los estilos se cargan desde internet | Sin conexión, la página se ve sin formato | Empaquetar los estilos en la compilación |
 | Apariencia e ícono tomados de WhatsApp | Posible reclamo de marca si el producto crece | Revisar antes de promocionarlo |
 | Uso para engañar en contextos serios | Riesgo de reputación | Mantener el tono de humor y las excusas inofensivas |
 
 ## Preguntas abiertas
 
-Las preguntas sobre hipótesis, metas y analítica se resolvieron en el [PRD de la fase 2](prd-fase-2-analitica-de-uso.md). La barra de escritura se activa en la fase 2 (RF-22). Queda una:
+Las preguntas sobre hipótesis, metas y analítica se resolvieron en el [PRD de la fase 2](prd-fase-2-analitica-de-uso.md). La barra de escritura se activa en la fase 3 (RF-22). Queda una:
 
 - [ ] ¿El perfil de usuario propuesto coincide con quién la usaría de verdad?

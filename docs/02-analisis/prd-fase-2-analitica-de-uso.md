@@ -1,18 +1,18 @@
 # PRD — ExcuseMe Fase 2: Analítica de uso
 
-10 de noviembre de 2026 · Mario · Estado: entrega 1 construida; entrega 2 por construir
+10 de noviembre de 2026 · Mario · Estado: entrega 1 publicada; entrega 2 en revisión
 
-La fase 2 agrega medición a la web para decidir con datos si vale la pena invertir en la fase 3 (WhatsApp y llamada real con Twilio).
+La fase 2 agrega medición a la web para decidir con datos si vale la pena invertir en la fase 4 (WhatsApp y llamada real con Twilio).
 
 ## Objetivo y decisión
 
-Si a los 30 días hay al menos 50 usuarios y al menos 15 hicieron una segunda llamada en otro día, se hace la fase 3; si no, se sigue mejorando la versión web.
+Si a los 30 días hay al menos 50 usuarios y al menos 15 hicieron una segunda llamada en otro día, se hace la fase 4 (Twilio); si no, se sigue mejorando la versión web.
 
 | Elemento | Definición | Estado |
 | --- | --- | --- |
 | Umbral de alcance | 50 usuarios en los primeros 30 días | Decidido |
 | Qué cuenta como usuario | Quien completa al menos una llamada contestada de 10 segundos o más; las visitas, las llamadas rechazadas y las más cortas no cuentan | Decidido |
-| Desde cuándo corre el mes | 30 días desde la primera publicación del enlace | Decidido |
+| Desde cuándo corre el mes | 30 días desde la primera publicación del enlace: del 11 de noviembre al 11 de diciembre de 2026 | Decidido |
 | Señal de valor | 15 usuarios (30 %) con una segunda llamada contestada en un día distinto, sin duración mínima: volver y contestar ya demuestra que le ve uso, aunque no escuche el guion | Decidido |
 
 Hoy la web no registra nada, así que ninguna hipótesis de la fase 1 se puede confirmar ni descartar.
@@ -22,7 +22,7 @@ Hoy la web no registra nada, así que ninguna hipótesis de la fase 1 se puede c
 | Hipótesis | Cómo se mide | Qué hay que construir |
 | --- | --- | --- |
 | H1: la llamada simulada resulta creíble | Calificación de 1 a 5 a la pregunta "¿Te funcionó?", con opciones para tocar, sin escribir | Tarjeta de calificación |
-| H2: bastan pocas excusas listas | Proporción de llamadas con excusa personalizada frente a las predefinidas | Opción Custom |
+| H2: bastan pocas excusas listas | Proporción de llamadas con excusa personalizada frente a las predefinidas | Opción Custom, en la fase 3 |
 | H3: el retardo ayuda a que parezca espontánea | Reparto de llamadas por retardo elegido | Evento de selección |
 | H4: se usa más de una vez | Usuarios con dos o más llamadas en días distintos | Identificador anónimo en el navegador |
 
@@ -34,27 +34,26 @@ El reingreso mide H4, no H1: alguien puede volver por curiosidad aunque la llama
 
 - Registro de eventos de uso anónimos.
 - Calificación de 1 a 5 después de la llamada.
-- Opción Custom: el bot pide por el chat el nombre de quien llama y el texto que leerá la voz.
+- Menú principal con Compartir y páginas informativas: Acerca de, Privacidad y cookies, Términos y condiciones.
+- Accesibilidad básica: uso con teclado, foco visible y contraste del texto.
 - Identificador anónimo guardado en el navegador para reconocer el segundo uso.
 - Lanzamiento con Friends and Family y difusión de voz a voz.
 
 **No entra**
 
-- WhatsApp, llamadas reales y Twilio: fase 3.
+- Excusa Custom, barra de escritura funcional y banner de consentimiento de cookies: fase 3.
+- WhatsApp, llamadas reales y Twilio: fase 4.
 - Cuentas de usuario o inicio de sesión.
-- Guardar o enviar el texto de las excusas personalizadas.
 - Publicidad o campañas pagadas.
 
 ## Entregas
 
-La fase se construye en dos entregas: primero la analítica, para llegar antes a los datos, y después las mejoras.
-
-| Entrega | Requisitos | Qué permite |
+| Entrega | Requisitos | Estado |
 | --- | --- | --- |
-| 1. Analítica | RF-13 a RF-16 y RF-18 a RF-21 | Medir H1, H3, H4 y el criterio de decisión. Con ella arrancan el lanzamiento y el conteo de 30 días |
-| 2. Mejoras | RF-17, RF-22 y RF-23 | Excusa Custom por chat, barra de escritura funcional y recordar la última excusa. Permite medir H2 |
+| 1. Analítica | RF-13 a RF-16 y RF-18 a RF-21 | Publicada el 11 de noviembre de 2026 |
+| 2. Menú, páginas informativas y accesibilidad básica | RF-24, RF-25 y RNF-16 | Construida, en revisión |
 
-H2 queda sin medir hasta la entrega 2, porque depende de que exista la opción Custom.
+La excusa Custom, la barra de escritura funcional y el recordatorio (RF-17, RF-22 y RF-23) pasaron a la [fase 3](prd-fase-3-mejoras.md), junto con el banner de consentimiento de cookies. Por eso H2 queda sin medir hasta la fase 3.
 
 ## Requisitos funcionales
 
@@ -64,13 +63,12 @@ H2 queda sin medir hasta la entrega 2, porque depende de que exista la opción C
 | RF-14 | Registrar el retardo elegido | El evento de selección incluye el retardo en segundos | Decidido |
 | RF-15 | Contar usuarios activos por día | Se puede consultar cuántos usuarios distintos usaron la web cada día | Decidido |
 | RF-16 | Calificación "¿Te funcionó?" de 1 a 5 | Aparece al colgar una llamada contestada; se responde con un toque y se puede ignorar sin bloquear el uso | Decidido |
-| RF-17 | Opción Custom | Es una cuarta opción junto a Familia, Empresa y Random; el bot pregunta por el chat quién llama y qué debe decir, el usuario responde escribiendo, y la voz lee ese texto al contestar | Decidido |
 | RF-18 | Identificador anónimo en el navegador | Se crea en la primera visita con localStorage y se reutiliza en las siguientes; si no está disponible, la web funciona igual | Decidido |
 | RF-19 | Registrar el desenlace de cada llamada: contestada, colgada o rechazada, y su duración | Cada llamada genera un evento al contestarla, y otro al colgarla (con la duración en segundos) o al rechazarla | Decidido |
 | RF-20 | Botón para compartir la web | Abre el menú de compartir del celular con el enlace | Decidido |
 | RF-21 | Un enlace distinto por canal | Cada canal usa su propia etiqueta en la dirección para saber de dónde llegó cada usuario | Decidido |
-| RF-22 | Barra de escritura funcional | La barra inferior deja de ser decorativa: el usuario puede escribir y enviar mensajes, y el bot los usa para recoger los datos de la excusa Custom. Si el usuario escribe fuera del flujo Custom, el bot responde siempre con el menú de excusas | Decidido |
-| RF-23 | Recordar la última excusa Custom | El nombre y el texto de la última excusa Custom se guardan en el navegador y se pueden repetir con un toque, sin escribirlos de nuevo; no salen del dispositivo (RNF-11) | Decidido |
+| RF-24 | Menú principal | Un botón de menú en el encabezado abre las opciones Compartir, Acerca de, Privacidad y cookies, y Términos y condiciones. Se puede usar con teclado y se cierra con Escape o tocando fuera | Decidido |
+| RF-25 | Páginas informativas | Acerca de, Privacidad y cookies, y Términos y condiciones se abren dentro de la app y explican en lenguaje sencillo qué hace la app y qué se mide | Decidido |
 
 Etiquetas de RF-21:
 
@@ -100,11 +98,11 @@ Esta fase cambia el requisito RNF-02 de la fase 1, que prometía no recolectar n
 | ID | Requisito |
 | --- | --- |
 | RNF-10 | Los eventos no incluyen nombre, teléfono, correo ni ubicación precisa |
-| RNF-11 | El nombre y el texto de una excusa Custom nunca salen del navegador |
 | RNF-12 | El identificador es aleatorio y no se puede vincular con una persona |
 | RNF-13 | La página informa en una línea visible qué se mide y para qué |
 | RNF-14 | Si el servicio de analítica falla o está bloqueado, la web funciona igual |
 | RNF-15 | La analítica es un adaptador más de la arquitectura actual, reemplazable sin tocar la lógica |
+| RNF-16 | Accesibilidad básica: todas las acciones se pueden hacer con teclado, el foco es visible, los botones con solo icono tienen nombre accesible y el texto pequeño cumple un contraste mínimo de 4,5:1 |
 
 La web es estática, así que los eventos se envían a un servicio externo: Google Analytics. Como usa cookies, el aviso de RNF-13 es obligatorio.
 
@@ -128,7 +126,6 @@ La audiencia inicial es de unos 400 contactos distintos entre WhatsApp e Instagr
 | --- | --- |
 | Los conocidos entran por cortesía y califican con generosidad | El umbral de 50 se cumple sin que haya interés real |
 | La calificación aparece justo cuando el usuario se está retirando | Pocas respuestas; H1 queda sin datos |
-| Custom agrega pasos antes de la llamada | La opción más lenta puede parecer la menos querida |
 | Pocos contactos pasan de ver el estado a completar una llamada | El mes termina sin datos suficientes para decidir |
 
 No quedan preguntas abiertas. Las pruebas propias se detienen antes de empezar a compartir y el conteo corre desde la primera publicación, así que no entran en los 30 días.

@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ExcuseMe - Generador de Llamadas de Emergencia</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Foco visible al navegar con teclado */
+      :focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
   </head>
   <body class="bg-gray-900 text-white antialiased overflow-hidden">
     <div id="root"></div>

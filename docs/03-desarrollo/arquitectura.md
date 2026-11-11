@@ -14,4 +14,4 @@ La estructura del código está descrita en el [README principal](../../README.m
 ## Qué habilita la arquitectura
 
 - **Fase 2:** la analítica entra como un adaptador más (RNF-15), sin tocar el dominio.
-- **Fase 3:** `domain/` y `application/` son JavaScript puro y se reutilizan en un backend de Node; Twilio sería otro adaptador.
+- **Fase 4:** `domain/` y `application/` son JavaScript puro y se reutilizan en un backend de Node; Twilio sería otro adaptador.

@@ -12,7 +12,7 @@ export default function RatingCard({ rating, onRate }) {
     <div className="w-full mt-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
       <p className="text-xs font-semibold text-slate-300 mb-2">¿Te funcionó la excusa?</p>
       <div className="flex items-center justify-between">
-        <span className="text-[10px] text-slate-500">Nada</span>
+        <span className="text-[10px] text-slate-400">Nada</span>
         <div className="flex space-x-1.5">
           {RATING_VALUES.map((value) => (
             <button
@@ -25,7 +25,7 @@ export default function RatingCard({ rating, onRate }) {
             </button>
           ))}
         </div>
-        <span className="text-[10px] text-slate-500">Perfecto</span>
+        <span className="text-[10px] text-slate-400">Perfecto</span>
       </div>
     </div>
   );

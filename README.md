@@ -94,7 +94,7 @@ Usan el ejecutor de pruebas integrado de Node (sin dependencias extra) y adaptad
 
 - **Nuevas excusas:** agrégalas en `src/domain/scenarios.js` y, si quieres icono y color propios, en `src/ui/scenarioStyles.js`.
 - **Otro tono o voz** (un MP3, una voz de IA): escribe un adaptador nuevo en `src/infrastructure/` que cumpla el puerto y cámbialo en `src/main.jsx`.
-- **WhatsApp con Twilio (planeado):** las credenciales de Twilio no pueden vivir en el navegador, así que irá en un backend pequeño. `domain/` y `application/` son JavaScript puro y se reutilizan tal cual en Node; Twilio entra como un adaptador más.
+- **WhatsApp con Twilio (fase 4, planeado):** las credenciales de Twilio no pueden vivir en el navegador, así que irá en un backend pequeño. `domain/` y `application/` son JavaScript puro y se reutilizan tal cual en Node; Twilio entra como un adaptador más.
 
 ---
 
