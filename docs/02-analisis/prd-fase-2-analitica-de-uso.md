@@ -58,7 +58,8 @@ El reingreso mide H4, no H1: alguien puede volver por curiosidad aunque la llama
 | RF-19 | Registrar el desenlace de cada llamada: contestada, colgada o rechazada, y su duración | Cada llamada genera un evento al contestarla, y otro al colgarla (con la duración en segundos) o al rechazarla | Decidido |
 | RF-20 | Botón para compartir la web | Abre el menú de compartir del celular con el enlace | Decidido |
 | RF-21 | Un enlace distinto por canal | Cada canal usa su propia etiqueta en la dirección para saber de dónde llegó cada usuario | Decidido |
-| RF-22 | Barra de escritura funcional | La barra inferior deja de ser decorativa: el usuario puede escribir y enviar mensajes, y el bot los usa para recoger los datos de la excusa Custom | Decidido |
+| RF-22 | Barra de escritura funcional | La barra inferior deja de ser decorativa: el usuario puede escribir y enviar mensajes, y el bot los usa para recoger los datos de la excusa Custom. Si el usuario escribe fuera del flujo Custom, el bot responde siempre con el menú de excusas | Decidido |
+| RF-23 | Recordar la última excusa Custom | El nombre y el texto de la última excusa Custom se guardan en el navegador y se pueden repetir con un toque, sin escribirlos de nuevo; no salen del dispositivo (RNF-11) | Decidido |
 
 Etiquetas de RF-21:
 
@@ -119,7 +120,4 @@ La audiencia inicial es de unos 400 contactos distintos entre WhatsApp e Instagr
 | Custom agrega pasos antes de la llamada | La opción más lenta puede parecer la menos querida |
 | Pocos contactos pasan de ver el estado a completar una llamada | El mes termina sin datos suficientes para decidir |
 
-Las pruebas propias se detienen antes de empezar a compartir y el conteo corre desde la primera publicación, así que no entran en los 30 días.
-
-- [ ] ¿Qué responde el bot cuando el usuario escribe fuera del flujo Custom?
-- [ ] ¿Se recuerda la última excusa Custom en el navegador para no escribirla de nuevo?
+No quedan preguntas abiertas. Las pruebas propias se detienen antes de empezar a compartir y el conteo corre desde la primera publicación, así que no entran en los 30 días.
