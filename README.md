@@ -55,24 +55,46 @@ Para ejecutar este proyecto localmente se requiere:
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Arquitectura (hexagonal)
+
+El código está organizado en puertos y adaptadores. Las dependencias apuntan siempre hacia adentro: la interfaz y la infraestructura conocen a la aplicación y al dominio, nunca al revés.
 
 ```text
-ExcuseMe/
-├── index.html          # Documento HTML principal
-├── package.json        # Configuración de dependencias y scripts de Node.js
-├── README.md           # Guía de uso y documentación del proyecto
-├── vite.config.js      # Configuración del empaquetador Vite
-└── src/
-    ├── main.jsx        # Punto de entrada de React
-    └── App.jsx         # Componente principal con la lógica de chat, llamada y voz
+src/
+├── domain/                 # Reglas puras: sin React ni APIs del navegador
+│   ├── scenarios.js            # Catálogo de excusas
+│   ├── call.js                 # Máquina de estados de la llamada
+│   └── chat.js                 # Contenido de los mensajes del chat
+├── application/            # Casos de uso y puertos
+│   ├── excuseService.js        # Programar, contestar, rechazar, colgar, silenciar
+│   └── ports.js                # Contratos: RingtonePlayer, VoiceSpeaker, Vibrator, Clock
+├── infrastructure/         # Adaptadores que implementan los puertos
+│   ├── webAudioRingtone.js     # Web Audio API
+│   ├── webSpeechVoice.js       # Web Speech API
+│   ├── navigatorVibrator.js    # Vibration API
+│   └── browserClock.js         # Reloj y temporizadores
+├── ui/                     # React: solo pinta el estado y dispara casos de uso
+│   ├── App.jsx
+│   ├── useExcuseService.js
+│   ├── scenarioStyles.js
+│   └── components/
+└── main.jsx                # Raíz de composición: conecta adaptadores y aplicación
+test/                       # Pruebas del dominio y de los casos de uso (sin navegador)
 ```
 
----
+### Pruebas
 
-## 🎨 Personalización
+```bash
+npm test
+```
 
-Puedes modificar o agregar más voces y guiones en el objeto `SCENARIOS` ubicado dentro del archivo `src/App.jsx`.
+Usan el ejecutor de pruebas integrado de Node (sin dependencias extra) y adaptadores falsos en lugar del navegador.
+
+### Cómo extenderlo
+
+- **Nuevas excusas:** agrégalas en `src/domain/scenarios.js` y, si quieres icono y color propios, en `src/ui/scenarioStyles.js`.
+- **Otro tono o voz** (un MP3, una voz de IA): escribe un adaptador nuevo en `src/infrastructure/` que cumpla el puerto y cámbialo en `src/main.jsx`.
+- **WhatsApp con Twilio (planeado):** las credenciales de Twilio no pueden vivir en el navegador, así que irá en un backend pequeño. `domain/` y `application/` son JavaScript puro y se reutilizan tal cual en Node; Twilio entra como un adaptador más.
 
 ---
 
