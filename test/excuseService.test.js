@@ -73,6 +73,18 @@ test('con retardo, cuenta regresiva y luego suena', () => {
   assert.equal(tickerRunning(), false);
 });
 
+test('prepara el audio en el toque que elige la excusa, antes de que suene (iOS)', () => {
+  const log = [];
+  const service = createExcuseService({
+    ringtone: { prepare: () => log.push('prepare'), start: () => log.push('start'), stop() {} },
+    vibrator: { start() {}, stop() {} },
+    voice: { speak() {}, pause() {}, resume() {}, cancel() {} },
+    clock: { now: () => new Date(), every: () => () => {} },
+  });
+  service.selectScenario('familia'); // con retardo: aún no suena
+  assert.deepEqual(log, ['prepare']);
+});
+
 test('elegir una excusa la registra en el chat y oculta el menú', () => {
   const { service } = setup();
   service.selectScenario('random');

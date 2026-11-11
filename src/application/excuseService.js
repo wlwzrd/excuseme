@@ -137,6 +137,8 @@ export function createExcuseService({
     selectScenario(scenarioId) {
       if (state.call.status !== Call.CallStatus.IDLE) return;
       const scenario = findScenario(scenarioId);
+      // Este método corre dentro del toque del usuario: es el momento de desbloquear el audio (iOS).
+      ringtone.prepare?.();
       const call = Call.schedule(scenario, state.delay);
       track(Events.EXCUSE_SELECTED, { tipo: scenario.id, retardo: state.delay });
       update({

@@ -5,6 +5,7 @@
 /**
  * Tono de llamada entrante.
  * @typedef {Object} RingtonePlayer
+ * @property {() => void} [prepare]  Desbloquea el audio; se llama dentro de un toque del usuario.
  * @property {() => void} start
  * @property {() => void} stop
  */
