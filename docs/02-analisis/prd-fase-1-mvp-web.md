@@ -124,14 +124,13 @@ Hoy no se puede medir nada: la web no tiene analítica, por diseño (RNF-02). Va
 | Los navegadores bloquean el audio hasta que el usuario toca la página | Con retardo funciona, porque el toque ya ocurrió; conviene confirmarlo en iPhone | Probar en dispositivos reales |
 | La voz depende de las voces instaladas en cada dispositivo | Puede sonar robótica o con acento de España | Fase 3: voz generada en servidor |
 | Guiones fijos y nombres genéricos ("Mamá (Urgente)") | Menos creíble para quien conoce al usuario | Fase 2: opción Custom |
-| La barra para escribir es decorativa | Puede confundir: parece un chat, pero no acepta texto | Quitarla o activarla |
+| La barra para escribir es decorativa | Puede confundir: parece un chat, pero no acepta texto | Fase 2: se activa (RF-22) |
 | Los estilos se cargan desde internet | Sin conexión, la página se ve sin formato | Empaquetar los estilos en la compilación |
 | Apariencia e ícono tomados de WhatsApp | Posible reclamo de marca si el producto crece | Revisar antes de promocionarlo |
 | Uso para engañar en contextos serios | Riesgo de reputación | Mantener el tono de humor y las excusas inofensivas |
 
 ## Preguntas abiertas
 
-Las preguntas sobre hipótesis, metas y analítica se resolvieron en el [PRD de la fase 2](prd-fase-2-analitica-de-uso.md). Quedan dos:
+Las preguntas sobre hipótesis, metas y analítica se resolvieron en el [PRD de la fase 2](prd-fase-2-analitica-de-uso.md). La barra de escritura se activa en la fase 2 (RF-22). Queda una:
 
 - [ ] ¿El perfil de usuario propuesto coincide con quién la usaría de verdad?
-- [ ] ¿La barra de escritura decorativa se quita o se convierte en función?

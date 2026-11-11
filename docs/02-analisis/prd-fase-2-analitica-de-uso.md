@@ -34,7 +34,7 @@ El reingreso mide H4, no H1: alguien puede volver por curiosidad aunque la llama
 
 - Registro de eventos de uso anónimos.
 - Calificación de 1 a 5 después de la llamada.
-- Opción Custom: nombre de quien llama y texto que leerá la voz.
+- Opción Custom: el bot pide por el chat el nombre de quien llama y el texto que leerá la voz.
 - Identificador anónimo guardado en el navegador para reconocer el segundo uso.
 - Lanzamiento con Friends and Family y difusión de voz a voz.
 
@@ -53,11 +53,12 @@ El reingreso mide H4, no H1: alguien puede volver por curiosidad aunque la llama
 | RF-14 | Registrar el retardo elegido | El evento de selección incluye el retardo en segundos | Decidido |
 | RF-15 | Contar usuarios activos por día | Se puede consultar cuántos usuarios distintos usaron la web cada día | Decidido |
 | RF-16 | Calificación "¿Te funcionó?" de 1 a 5 | Aparece al colgar una llamada contestada; se responde con un toque y se puede ignorar sin bloquear el uso | Decidido |
-| RF-17 | Opción Custom | Es una cuarta opción junto a Familia, Empresa y Random; pide el nombre de quien llama y el texto a leer, y la voz lee ese texto al contestar | Decidido |
+| RF-17 | Opción Custom | Es una cuarta opción junto a Familia, Empresa y Random; el bot pregunta por el chat quién llama y qué debe decir, el usuario responde escribiendo, y la voz lee ese texto al contestar | Decidido |
 | RF-18 | Identificador anónimo en el navegador | Se crea en la primera visita con localStorage y se reutiliza en las siguientes; si no está disponible, la web funciona igual | Decidido |
 | RF-19 | Registrar el desenlace de cada llamada: contestada, colgada o rechazada, y su duración | Cada llamada genera un evento al contestarla, y otro al colgarla (con la duración en segundos) o al rechazarla | Decidido |
 | RF-20 | Botón para compartir la web | Abre el menú de compartir del celular con el enlace | Decidido |
 | RF-21 | Un enlace distinto por canal | Cada canal usa su propia etiqueta en la dirección para saber de dónde llegó cada usuario | Decidido |
+| RF-22 | Barra de escritura funcional | La barra inferior deja de ser decorativa: el usuario puede escribir y enviar mensajes, y el bot los usa para recoger los datos de la excusa Custom | Decidido |
 
 Etiquetas de RF-21:
 
@@ -118,4 +119,7 @@ La audiencia inicial es de unos 400 contactos distintos entre WhatsApp e Instagr
 | Custom agrega pasos antes de la llamada | La opción más lenta puede parecer la menos querida |
 | Pocos contactos pasan de ver el estado a completar una llamada | El mes termina sin datos suficientes para decidir |
 
-No quedan preguntas abiertas. Las pruebas propias se detienen antes de empezar a compartir y el conteo corre desde la primera publicación, así que no entran en los 30 días.
+Las pruebas propias se detienen antes de empezar a compartir y el conteo corre desde la primera publicación, así que no entran en los 30 días.
+
+- [ ] ¿Qué responde el bot cuando el usuario escribe fuera del flujo Custom?
+- [ ] ¿Se recuerda la última excusa Custom en el navegador para no escribirla de nuevo?
