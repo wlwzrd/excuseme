@@ -7,15 +7,18 @@ import ScenarioMenu from './ScenarioMenu.jsx';
 const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
 export default function MessageList({ messages, call, onSelectScenario, onRate }) {
-  const endRef = useRef(null);
+  const listRef = useRef(null);
   const countdown = call.status === CallStatus.COUNTDOWN ? call.secondsLeft : null;
 
+  // Se desplaza solo el chat. scrollIntoView movía la página entera en el celular
+  // y dejaba el encabezado fuera de la pantalla.
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const list = listRef.current;
+    if (list) list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
   }, [messages, countdown]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]">
+    <div ref={listRef} className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 space-y-4 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]">
       {messages.map((msg) => (
         <div key={msg.id} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
           <div
@@ -43,7 +46,6 @@ export default function MessageList({ messages, call, onSelectScenario, onRate }
         </div>
       )}
 
-      <div ref={endRef} />
     </div>
   );
 }

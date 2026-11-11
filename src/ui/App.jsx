@@ -16,7 +16,7 @@ export default function App({ service }) {
   const page = pageId ? PAGES[pageId] : null;
 
   return (
-    <div className="flex flex-col h-screen max-w-md mx-auto bg-slate-950 font-sans shadow-2xl relative border-x border-slate-800">
+    <div className="app-shell flex flex-col max-w-md mx-auto bg-slate-950 font-sans shadow-2xl relative border-x border-slate-800">
       <Header onShare={service.share} onOpenPage={setPageId} />
       <DelaySelector delay={delay} onChange={service.setDelay} />
       <MessageList
