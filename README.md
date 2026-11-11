@@ -98,6 +98,12 @@ Usan el ejecutor de pruebas integrado de Node (sin dependencias extra) y adaptad
 
 ---
 
+## 🧭 Documentación de producto
+
+El proyecto simula el ciclo completo de un producto: ideación, análisis, desarrollo, despliegue y valor. Los PRDs de cada fase y las decisiones están en [`docs/`](docs/README.md).
+
+---
+
 ## 📄 Licencia
 
 Este proyecto se distribuye bajo la licencia **MIT**. ¡Sientes libre de adaptarlo y usarlo cuando necesites una buena excusa!
